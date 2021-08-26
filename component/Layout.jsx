@@ -4,6 +4,9 @@ import {
   Typography,
   Container,
   Link,
+  createMuiTheme,
+  ThemeProvider,
+  CssBaseline
 } from "@material-ui/core";
 import Head from "next/head";
 import UseStyles from "../utils/styles";
@@ -11,6 +14,25 @@ import Image from "next/image";
 import NextLink from "next/link";
 
 function layout({ children , title , description   }) {
+  const theme = createMuiTheme({
+      typography:{
+       
+        h1:{
+          fontSize:"1.6rem",
+          fontWeight:500,
+          margin:"1rem 0"
+        },
+        h2:{
+          fontSize:"1.4rem",
+          fontWeight:400,
+          margin:"1rem 0"
+        },
+        body1:{
+          fontWeight:'normal'
+        }
+      }
+  })
+
   const classes = UseStyles();
   return (
 
@@ -20,6 +42,8 @@ function layout({ children , title , description   }) {
         {description ? <meta name='description' content={description} /> : ''}
         <link rel="shortcut icon" href="/logo.png" type="image/x-icon" />
       </Head>
+      <ThemeProvider theme={theme}>
+        <CssBaseline/>
       <AppBar className={classes.navbar} position="static">
         <Toolbar>
           <NextLink href="/" passHref>
@@ -53,6 +77,7 @@ function layout({ children , title , description   }) {
       <footer className={classes.footer}>
         <Typography>All right reserved , Ionic Byte</Typography>
       </footer>
+      </ThemeProvider>
     </div>
   );
 }

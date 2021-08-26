@@ -48,6 +48,9 @@ function slug({ imgAlt, imgPic }) {
           </Grid>
           <Grid item md={3} xm={12}>
             <List>
+            <ListItem>
+                <Typography variant="h1">{product.name}</Typography>{" "}
+              </ListItem>
               <ListItem>
                 <Typography>Category: {product.category}</Typography>{" "}
               </ListItem>
@@ -92,7 +95,7 @@ function slug({ imgAlt, imgPic }) {
                   </Grid>
                 </ListItem>
                 <ListItem>
-                  <Button fullWidth color="primary" variant="contained" >Add to Stock</Button>
+                  <Button fullWidth color="primary" variant="contained" >Add to Cart</Button>
                 </ListItem>
               </List>
             </Card>
