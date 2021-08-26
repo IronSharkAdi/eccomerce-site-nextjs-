@@ -10,12 +10,14 @@ import UseStyles from "../utils/styles";
 import Image from "next/image";
 import NextLink from "next/link";
 
-function layout({ children }) {
+function layout({ children , title , description   }) {
   const classes = UseStyles();
   return (
+
     <div>
       <Head>
-        <title>IB-commerce</title>
+        <title>{title ? title : ''} IB-commerce</title>
+        {description ? <meta name='description' content={description} /> : ''}
         <link rel="shortcut icon" href="/logo.png" type="image/x-icon" />
       </Head>
       <AppBar className={classes.navbar} position="static">

@@ -35,7 +35,7 @@ export default function Home() {
                 </CardActionArea>
                 </NextLink>
                 <CardActions>
-                  <Typography>{product.price}</Typography>
+                  <Typography>${product.price}</Typography>
                   <Button size="small" >Add to Cart</Button>
                 </CardActions>
               </Card>
