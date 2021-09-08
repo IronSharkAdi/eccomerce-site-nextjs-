@@ -40,6 +40,7 @@ export default function Home() {
                 </CardActions>
               </Card>
             </Grid>
+            
           ))}
         </Grid>
       </Layout>

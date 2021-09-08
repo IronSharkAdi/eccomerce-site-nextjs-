@@ -32,7 +32,7 @@ function slug({ imgAlt, imgPic }) {
           <NextLink href="/" passHref>
             <Link>
               {" "}
-              <Typography> Back To Products </Typography>
+              <Typography color="secondary"> Back To Products </Typography>
             </Link>
           </NextLink>
         </div>

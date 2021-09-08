@@ -4,17 +4,26 @@ import {
   Typography,
   Container,
   Link,
-  createMuiTheme,
-  ThemeProvider,
-  CssBaseline
+  
+  CssBaseline,
+  Switch
 } from "@material-ui/core";
 import Head from "next/head";
 import UseStyles from "../utils/styles";
 import Image from "next/image";
 import NextLink from "next/link";
+import { Store } from "../utils/store";
+import { useContext } from "react";
+import {createTheme , ThemeProvider,} from '@material-ui/core/styles'
+import deepPurple from '@material-ui/core/colors/deepPurple';
+import Cookies from "js-cookie";
+
 
 function layout({ children , title , description   }) {
-  const theme = createMuiTheme({
+  const {state , dispatch} = useContext(Store);
+  const {darkMode} = state;
+
+  const theme = createTheme({ 
       typography:{
        
         h1:{
@@ -30,8 +39,28 @@ function layout({ children , title , description   }) {
         body1:{
           fontWeight:'normal'
         }
+      },
+      palette:{
+        type: darkMode ? "dark" : "light" , 
+        primary: {
+          main: deepPurple[500],
+          dark:'#9575cd'
+
+        },
+        secondary: {
+          main: '#c5cae9',
+          dark: "#ce93d8",
+
+        },
+
       }
   })
+  const darkModeHandler = () => {
+    dispatch({type : darkMode ? 'DARK_MODE_OFF' : 'DARK_MODE_ON'});
+    const newDarkMode = !darkMode
+    Cookies.set('darkMode', newDarkMode ? 'ON' : 'OFF');
+
+  }
 
   const classes = UseStyles();
   return (
@@ -60,6 +89,7 @@ function layout({ children , title , description   }) {
           {/* Right Side links */}
           <div className={classes.grow}> </div>
             <div>
+              <Switch checked={darkMode} onChange={darkModeHandler} ></Switch>
               <NextLink passHref href='/cart'>
                 <Link>Cart</Link>
               </NextLink>
