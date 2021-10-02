@@ -14,12 +14,11 @@ import { Link } from "@material-ui/core";
 import NextLink from "next/link";
 import Image from "next/image";
 import UseStyles from "../../utils/styles";
+import db from '../../utils/db'
+import Products from '../../models/products'
 
-function slug({ imgAlt, imgPic }) {
+export default function slug({ product }) {
   const classes = UseStyles();
-  const router = useRouter();
-  const { slug } = router.query;
-  const product = data.products.find((x) => x.slug === slug);
 
   if (!product) {
     return <div>Page not found</div>;
@@ -106,4 +105,18 @@ function slug({ imgAlt, imgPic }) {
   );
 }
 
-export default slug;
+
+
+
+export async function getServerSideProps(context) {
+  const {params} = context;
+  const { slug } = params;
+  await db.connect();
+  const product = await Products.findOne({slug}).lean();
+  await db.disconnect;
+  return {
+    props: {
+      product : db.convertDocToObj(product),
+    },
+  }
+}
